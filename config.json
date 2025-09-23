@@ -1,0 +1,83 @@
+{
+  "simulation_mode": false,
+  "mqtt": {
+    "broker": "10.201.50.104",
+    "simulation_broker": "10.201.50.104",
+    "port": 1883,
+    "keepalive": 3,
+    "username": "device{device_serial}_client",
+    "password": "111test",
+    "client_id_prefix": "excavator_ctrl_",
+    "control_topic_base": "{excavator_id}/ctrl/",
+    "non_control_topics": ["remote_sensor/remote_ctrl/rtk_info", "sensor2", "sensor3"],
+    "safe_topic": "touch_screen/heartbeat",
+    "safe_window_size": 4,
+    "status_topics": {
+      "external_equipment_status": "remote_ctrl/console/equipment_status",
+      "internal_status": "up/status/{excavator_id}"
+    },
+    "device_config": {
+      "device_serial": "1",
+      "excavator_id": "LSVHJ13302222176{device_serial}"
+    }
+  },
+  "can": {
+    "interface": "can0",
+    "bitrate": 250000,
+    "send_interval_ms": 100,
+    "listen_timeout_ms": 1000,
+    "simulation_receive_messages": [  
+      {
+        "id": "0x211",
+        "data": "050F0F0F0F0F0F0F",
+        "interval_ms": 5000
+      },
+      {
+        "id": "0x221",
+        "data": "0A0B0F0F0F0F0F0F",
+        "interval_ms": 5000
+      }
+    ]
+  },
+  "logging": {
+    "level": "ERROR",
+    "file": "excavator_controller.log",
+    "max_bytes": 10485760,
+    "backup_count": 3
+  },
+  "system": {
+    "queue_sizes": {
+      "control_queue_maxsize": 200,
+      "status_queue_maxsize": 200
+    },
+    "timeouts": {
+      "status_queue_get_timeout_sec": 1.0,
+      "thread_join_timeout_sec": 5.0,
+      "can_listener_join_timeout_sec": 3.0,
+      "startup_wait_sec": 0.5,
+      "shutdown_wait_sec": 0.2
+    },
+    "monitoring": {
+      "main_loop_monitor_interval_sec": 3.0,
+      "performance_warning_threshold_sec": 0.02
+    },
+    "retry_delays": {
+      "can_connect_retry_sec": 5,
+      "mqtt_connect_retry_sec": 30
+    },
+    "can_timeouts": {
+      "notifier_timeout_sec": 0.1,
+      "send_timeout_sec": 0.1,
+      "notifier_stop_timeout_sec": 1.0,
+      "simulation_stop_wait_sec": 2.0,
+      "simulation_join_timeout_sec": 1.0
+    },
+    "mqtt_timeouts": {
+      "reconnect_min_delay_sec": 20,
+      "reconnect_max_delay_sec": 40,
+      "clean_session": true,
+      "heartbeat_detection_interval_sec":0.1
+    }
+  },
+  "protocol_file": "protocol.json"
+}

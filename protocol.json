@@ -1,0 +1,186 @@
+{
+  "mqtt_to_can": {
+
+    "action1": { "can_id": "0x111", "signal": "action1", "description": "动作信号1", "byte": 0, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
+    "action2": { "can_id": "0x111", "signal": "action2", "description": "动作信号2", "byte": 1, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
+    "action3": { "can_id": "0x111", "signal": "action3", "description": "动作信号3", "byte": 2, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action4": { "can_id": "0x111", "signal": "action4", "description": "动作信号4", "byte": 3, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action5": { "can_id": "0x111", "signal": "action5", "description": "动作信号5", "byte": 4, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action6": { "can_id": "0x111", "signal": "action6", "description": "动作信号6", "byte": 5, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action7": { "can_id": "0x111", "signal": "action7", "description": "动作信号7", "byte": 6, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action8": { "can_id": "0x111", "signal": "action8", "description": "动作信号8", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+
+    "heartbeat_111": { "can_id": "0x111", "signal": "heartbeat_111", "description": "心跳(0x111)", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "generated": true, "initial_value": 0 },
+    "action9": { "can_id": "0x112", "signal": "action9", "description": "动作信号9", "byte": 0, "bit": 0, "length": 16, "type": "uint16", "initial_value": 1080 },
+
+    "power1":  { "can_id": "0x121", "signal": "power1",  "description": "动力信号1",  "byte": 0, "bit": 0, "length": 1, "type": "bool", "initial_value": 0 },
+    "power2":  { "can_id": "0x121", "signal": "power2",  "description": "动力信号2",  "byte": 0, "bit": 1, "length": 1, "type": "bool", "initial_value": 0 },
+    "power3":  { "can_id": "0x121", "signal": "power3",  "description": "动力信号3",  "byte": 0, "bit": 2, "length": 1, "type": "bool", "initial_value": 0 },
+    "power4":  { "can_id": "0x121", "signal": "power4",  "description": "动力信号4",  "byte": 0, "bit": 3, "length": 1, "type": "bool", "initial_value": 0 },
+    "power5":  { "can_id": "0x121", "signal": "power5",  "description": "动力信号5",  "byte": 0, "bit": 4, "length": 1, "type": "bool", "initial_value": 0 },
+    "power6":  { "can_id": "0x121", "signal": "power6",  "description": "动力信号6",  "byte": 0, "bit": 5, "length": 1, "type": "bool", "initial_value": 0 },
+    "power7":  { "can_id": "0x121", "signal": "power7",  "description": "动力信号7",  "byte": 0, "bit": 6, "length": 1, "type": "bool", "initial_value": 0 },
+    "power8":  { "can_id": "0x121", "signal": "power8",  "description": "动力信号8",  "byte": 0, "bit": 7, "length": 1, "type": "bool", "initial_value": 0 },
+    "power9":  { "can_id": "0x121", "signal": "power9",  "description": "动力信号9",  "byte": 1, "bit": 0, "length": 1, "type": "bool", "initial_value": 0 },
+    "power10": { "can_id": "0x121", "signal": "power10", "description": "动力信号10", "byte": 1, "bit": 1, "length": 1, "type": "bool", "initial_value": 0 },
+    "power16": { "can_id": "0x121", "signal": "power16", "description": "动力信号16", "byte": 1, "bit": 7, "length": 1, "type": "bool", "initial_value": 0 },
+    "power17": { "can_id": "0x121", "signal": "power17", "description": "动力信号17", "byte": 2, "bit": 0, "length": 4, "type": "uint8","initial_value": 0 },
+
+    "heartbeat_121": { "can_id": "0x121", "signal": "heartbeat_121", "description": "心跳(0x121)", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "generated": true, "initial_value": 0 },
+
+
+    "aux1":    { "can_id": "0x131", "signal": "aux1",    "description": "辅助信号1", "byte": 0, "bit": 0, "length": 2, "type": "uint8", "initial_value": 0 },
+    "aux2":    { "can_id": "0x131", "signal": "aux2",    "description": "辅助信号2", "byte": 0, "bit": 2, "length": 2, "type": "uint8", "initial_value": 0 },
+    "aux3":    { "can_id": "0x131", "signal": "aux3",    "description": "辅助信号3", "byte": 0, "bit": 4, "length": 2, "type": "uint8", "initial_value": 0 },
+    "heartbeat_131": { "can_id": "0x131", "signal": "heartbeat_131", "description": "心跳(0x131)", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "generated": true, "initial_value": 0 }
+  },
+  "mqtt_to_mqtt": {
+    "remote_sensor/remote_ctrl/rtk_info": {
+      "target_key": "rtk_info",
+      "description": "RTK定位信息",
+      "default_value": {
+        "longitude": 102.13154800381285,
+        "latitude": 27.904670302925,
+        "altitude": 1541.74523257812,
+        "roll": 2.531362536152344,
+        "pitch": 0.5235541609256810,
+        "yaw": -153.45096251959513,
+        "timestamp": "1704720307.3"
+      },
+      "data_structure": {
+        "longitude": "float",
+        "latitude": "float", 
+        "altitude": "float",
+        "roll": "float",
+        "pitch": "float",
+        "yaw": "float",
+        "timestamp": "string"
+      }
+    },
+    "sensor2": {
+      "target_key": "sensor2_data",
+      "description": "传感器2数据",
+      "default_value": {
+        "sensor_id": "sensor2",
+        "status": "normal",
+        "value": 0.0,
+        "timestamp": "1704720307.3"
+      },
+      "data_structure": {
+        "sensor_id": "string",
+        "status": "string",
+        "value": "float",
+        "timestamp": "string"
+      }
+    },
+    "sensor3": {
+      "target_key": "sensor3_data",
+      "description": "传感器3数据",
+      "default_value": {
+        "sensor_id": "sensor3",
+        "status": "normal",
+        "value": 0.0,
+        "timestamp": "1704720307.3"
+      },
+      "data_structure": {
+        "sensor_id": "string",
+        "status": "string",
+        "value": "float",
+        "timestamp": "string"
+      }
+    }
+  },
+  "protocol_mapping": {
+    "external_status_fields": {
+      "description": "对外协议状态字段映射",
+      "target_topic_template": "remote_ctrl/console/equipment_status",
+      "fields": {
+        "status_11": {"source": "device_config", "field": "device_serial", "type": "string", "description": "设备编号", "default_value": "5"},
+        "status_12": {"source": "rtk_info", "field": "longitude", "type": "float", "description": "经度", "default_value": 102.13154800381285},
+        "status_13": {"source": "rtk_info", "field": "latitude", "type": "float", "description": "纬度", "default_value": 27.904670302925},
+        "status_14": {"source": "rtk_info", "field": "altitude", "type": "float", "description": "高程", "default_value": 1541.74523257812},
+        "status_15": {"source": "rtk_info", "field": "roll", "type": "float", "description": "横滚角", "default_value": 2.531362536152344},
+        "status_16": {"source": "rtk_info", "field": "pitch", "type": "float", "description": "俯仰角", "default_value": 0.5235541609256810},
+        "status_17": {"source": "rtk_info", "field": "yaw", "type": "float", "description": "偏航角", "default_value": -153.45096251959513},
+        "status_18": {"source": "rtk_info", "field": "timestamp", "type": "string", "description": "时间戳", "default_value": "1704720307.3"}
+      }
+    },
+    "internal_class_mapping": {
+      "description": "对内协议类别映射",
+      "target_topic_template": "up/status/{excavator_id}",
+      "classes": {
+        "class1": {
+          "source": "can_data",
+          "description": "CAN信息",
+          "field_mapping": {
+            "status_11": {"source_field": "status_1", "type": "int", "default_value": 0},
+            "status_12": {"source_field": "status_2", "type": "int", "default_value": 0},
+            "status_13": {"source_field": "status_3", "type": "bool", "default_value": false},
+            "status_14": {"source_field": "unknown_1", "type": "int", "default_value": 0},
+            "status_15": {"source_field": "unknown_2", "type": "int", "default_value": 0},
+            "status_16": {"source_field": "unknown_3", "type": "int", "default_value": 0}
+          }
+        },
+        "class2": {
+          "source": "mqtt_data",
+          "description": "RTK信息",
+          "field_mapping": {
+            "status_21": {"source_field": "rtk_info.longitude", "type": "float", "default_value": 102.13154800381285},
+            "status_22": {"source_field": "rtk_info.latitude", "type": "float", "default_value": 27.904670302925},
+            "status_23": {"source_field": "rtk_info.altitude", "type": "float", "default_value": 1541.74523257812},
+            "status_24": {"source_field": "rtk_info.roll", "type": "float", "default_value": 2.531362536152344},
+            "status_25": {"source_field": "rtk_info.pitch", "type": "float", "default_value": 0.5235541609256810},
+            "status_26": {"source_field": "rtk_info.yaw", "type": "float", "default_value": -153.45096251959513}
+          }
+        },
+        "class3": {
+          "source": "simulation_data",
+          "description": "模拟信息",
+          "field_mapping": {
+            "status_31": {"source_field": "status_31", "type": "int", "default_value": 0, "description": "档位状态"},
+            "status_32": {"source_field": "status_32", "type": "float", "default_value": 78.3, "description": "系统状态32"},
+            "status_33": {"source_field": "status_33", "type": "float", "default_value": 65.4, "description": "系统状态13"},
+            "status_34": {"source_field": "status_34", "type": "float", "default_value": 61.7, "description": "系统状态14"},
+            "status_35": {"source_field": "status_35", "type": "float", "default_value": 6.1, "description": "系统状态15"},
+            "status_36": {"source_field": "status_36", "type": "float", "default_value": 32.0, "description": "能耗数据"}
+          }
+        }
+      }
+    }
+  },
+  "simulation_config": {
+    "enable": true,
+    "random_range": [0.1, 1.5],
+    "precision": 3,
+    "default_values": {
+      "status_31": 0,
+      "status_32": 78.3,
+      "status_33": 65.4,
+      "status_34": 61.7,
+      "status_35": 6.1,
+      "status_36": 32.0
+    },
+    "gear_energy_consumption": [8, 11.5, 16, 20, 23, 28, 30, 32, 34, 36, 38]
+  },
+  "can_to_mqtt": {
+
+    "0x211": {
+      "description": "设备状态反馈",
+      "signals": {
+        "unknown_1":  {"byte": 0, "bit": 0, "length": 2, "type": "uint8", "default_value": 0},
+        "unknown_2":  {"byte": 0, "bit": 2, "length": 2, "type": "uint8", "default_value": 0},
+        "unknown_3":  {"byte": 2, "length": 8, "type": "uint8", "scale": 2, "default_value": 0},
+        "unknown_4":  {"byte": 4, "length": 16, "type": "uint16", "default_value": 0}
+      }
+    },
+
+    "0x221": {
+      "description": "设备信息反馈",
+      "signals": {
+        "status_1":   {"byte": 0, "length": 8, "type": "uint8", "default_value": 0},
+        "status_2":   {"byte": 1, "length": 8, "type": "uint8", "default_value": 0},
+        "status_3":   {"byte": 7, "bit": 0, "length": 1, "type": "bool", "default_value": false}
+      }
+    }
+  }
+}
