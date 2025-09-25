@@ -78,13 +78,19 @@ class ControlProcessor(threading.Thread):
                          # 单个消息更新失败不应阻止其他消息更新或发送
                          self.logger.error(f"应用最新指令 (Topic: {topic}) 更新状态时出错: {e}", exc_info=True)
                 self.logger.debug("本轮最新指令应用完成。")
-            # *** 修改结束 ***
+            
+            if not self.mqtt_handler.is_heartbeating:
+                if self.latest_updates_ctrl_dict:
+                    self.logger.warning("检测到上游心跳停止，清空历史控制指令并重置Translator状态")
+                    self.latest_updates_ctrl_dict.clear()
+                    self.translator.reset_state()  # 重置Translator状态为初始值
 
 
             # 2. 检查是否到达发送时间 (保持不变)
             current_time = time.time() # 当清空队列代码块在前，此时 current_time 为设定周期+清空队列时间2-3ms（以last_send_time为基准）
             # 确保即使处理消息耗时很长，也能在处理后立即检查是否需要发送
             if current_time - last_send_time >= self.send_interval_sec and self.mqtt_handler.get_is_connected() and self.mqtt_handler.is_heartbeating:
+            # if current_time - last_send_time >= self.send_interval_sec :
                 # 到达发送周期，为每个目标 CAN ID 构建并发送帧
                 self.logger.debug(f"到达 CAN 发送时间点 (实际间隔{current_time - last_send_time:.3f}s —— 理论间隔 {self.send_interval_sec:.3f}s)")
                 # 如果间隔比设定周期大于配置的阈值 打印warning级别日志
@@ -166,8 +172,20 @@ class StatusProcessor(threading.Thread):
                 # 1. 从队列获取CAN消息
                 timeout_config = self.config_manager.get_timeout_config()
                 queue_timeout = timeout_config.get('status_queue_get_timeout_sec', 1.0)
-                can_msg = self.status_queue.get(timeout=queue_timeout)
+                #can_msg = self.status_queue.get(timeout=queue_timeout)
                 
+                try:
+                    can_msg = self.status_queue.get(timeout=queue_timeout) 
+                    # 标记消息完成
+                    #self.status_queue.task_done()
+                    can_message_received = True
+                    self.logger.debug(f"接收到CAN消息: {can_msg}")
+                except queue.Empty:
+                    # 队列为空时，使用None表示没有接收到CAN消息
+                    can_msg = None
+                    can_message_received = False
+                    self.logger.info(f"本轮CAN队列为空，将使用默认值发送MQTT消息")
+
                 # 2. 统一数据收集
                 collected_data = self.data_collector.collect_all_data(
                     can_msg=can_msg,
@@ -198,10 +216,13 @@ class StatusProcessor(threading.Thread):
                         self.mqtt_handler.publish_status(external_topic, external_data)
                         self.logger.debug(f"已发布RTK数据给矿方中控台: {external_topic}")
                 
-                self.status_queue.task_done()
-                
-            except queue.Empty:
-                continue
+                #self.status_queue.task_done()
+                if can_message_received:
+                    self.status_queue.task_done()
+
+            #except queue.Empty:
+                #self.logger.warning(f"本轮CAN队列为空{self.status_queue},可能影响后续MQTT发送话题,持续等待到CAN队列非空")
+                #continue
             except Exception as e:
                 self.logger.error(f"处理状态消息时发生错误: {e}", exc_info=True)
             
