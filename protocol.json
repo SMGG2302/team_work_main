@@ -3,12 +3,10 @@
 
     "action1": { "can_id": "0x111", "signal": "action1", "description": "动作信号1", "byte": 0, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
     "action2": { "can_id": "0x111", "signal": "action2", "description": "动作信号2", "byte": 1, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
-    "action3": { "can_id": "0x111", "signal": "action3", "description": "动作信号3", "byte": 2, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
-    "action4": { "can_id": "0x111", "signal": "action4", "description": "动作信号4", "byte": 3, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
-    "action5": { "can_id": "0x111", "signal": "action5", "description": "动作信号5", "byte": 4, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
-    "action6": { "can_id": "0x111", "signal": "action6", "description": "动作信号6", "byte": 5, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
-    "action7": { "can_id": "0x111", "signal": "action7", "description": "动作信号7", "byte": 6, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
-    "action8": { "can_id": "0x111", "signal": "action8", "description": "动作信号8", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "initial_value": 0 },
+    "action3": { "can_id": "0x111", "signal": "action3", "description": "动作信号3", "byte": 2, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
+    "action4": { "can_id": "0x111", "signal": "action4", "description": "动作信号4", "byte": 3, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
+    "action5": { "can_id": "0x111", "signal": "action5", "description": "动作信号5", "byte": 4, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
+    "action6": { "can_id": "0x111", "signal": "action6", "description": "动作信号6", "byte": 5, "bit": 0, "length": 8, "type": "uint8", "initial_value": 127 },
 
     "heartbeat_111": { "can_id": "0x111", "signal": "heartbeat_111", "description": "心跳(0x111)", "byte": 7, "bit": 0, "length": 8, "type": "uint8", "generated": true, "initial_value": 0 },
     "action9": { "can_id": "0x112", "signal": "action9", "description": "动作信号9", "byte": 0, "bit": 0, "length": 16, "type": "uint16", "initial_value": 1080 },
@@ -23,6 +21,9 @@
     "power8":  { "can_id": "0x121", "signal": "power8",  "description": "动力信号8",  "byte": 0, "bit": 7, "length": 1, "type": "bool", "initial_value": 0 },
     "power9":  { "can_id": "0x121", "signal": "power9",  "description": "动力信号9",  "byte": 1, "bit": 0, "length": 1, "type": "bool", "initial_value": 0 },
     "power10": { "can_id": "0x121", "signal": "power10", "description": "动力信号10", "byte": 1, "bit": 1, "length": 1, "type": "bool", "initial_value": 0 },
+    "power11": { "can_id": "0x121", "signal": "power11", "description": "动力信号11", "byte": 1, "bit": 2, "length": 1, "type": "bool", "initial_value": 0 },
+    "power12": { "can_id": "0x121", "signal": "power12", "description": "动力信号12", "byte": 1, "bit": 3, "length": 1, "type": "bool", "initial_value": 0 },
+    "power13": { "can_id": "0x121", "signal": "power13", "description": "动力信号13", "byte": 1, "bit": 4, "length": 1, "type": "bool", "initial_value": 0 },
     "power16": { "can_id": "0x121", "signal": "power16", "description": "动力信号16", "byte": 1, "bit": 7, "length": 1, "type": "bool", "initial_value": 0 },
     "power17": { "can_id": "0x121", "signal": "power17", "description": "动力信号17", "byte": 2, "bit": 0, "length": 4, "type": "uint8","initial_value": 0 },
 
