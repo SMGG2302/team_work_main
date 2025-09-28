@@ -1,3 +1,0 @@
-2025-09-23 10:46:12,628 - ExcavatorController - ERROR - [MainThread] - can_handler.py:106 - 初始化 CAN 时发生系统错误 (接口 'can0' 是否存在? 权限?): [Errno 19] No such device
-2025-09-23 10:46:14,607 - ExcavatorController - CRITICAL - [MainThread] - can_handler.py:242 - 真实 CAN 总线初始化失败，无法启动监听。
-2025-09-23 10:46:14,608 - ExcavatorController - CRITICAL - [MainThread] - main.py:107 - CAN 监听器启动失败，程序退出。
