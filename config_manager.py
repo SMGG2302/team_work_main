@@ -47,6 +47,23 @@ class ConfigManager:
         self._initialized = True
         self.logger.info("配置管理器初始化完成。") 
 
+    def reload_config(self):
+        """重新加载配置文件"""
+        self.logger.info("重新加载配置文件...")
+        try:
+            # 重新加载主配置文件
+            self.config = self._load_json(self.config_path, "基础配置")
+            
+            # # 重新加载协议文件
+            # self.protocol = self._load_json(self.protocol_path, "协议定义")
+            
+            self._validate_config()
+            self.logger.info("基础配置文件重新加载完成。")
+            return True
+        except Exception as e:
+            self.logger.error(f"重新加载基础配置文件失败: {e}")
+            return False
+
     def _load_json(self, file_path, description="配置"):
         """加载 JSON 文件并处理错误"""
         try:

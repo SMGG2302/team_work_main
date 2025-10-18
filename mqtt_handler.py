@@ -270,11 +270,13 @@ class MqttHandler:
                 # 如果窗口满，且所有值都相同，则认为心跳停止
                 if len(self.safe_main_screen_heartbeat_window) == window_size and len(set(self.safe_main_screen_heartbeat_window)) == 1:
                     self.is_heartbeating = False # or self.simulation_mode # True False 如果仿真时必须查看发送的CAN帧 强制True，否则将触发功能安全保护不发送 
-                    self.logger.warning("上游心跳异常 - 上游与域控之间通过MQTT通信，大屏崩溃，停止发送CAN帧[PS:仿真模式下不影响虚拟CAN帧发送]")
+                    self.logger.debug("上游心跳异常 - 上游与域控之间通过MQTT通信，大屏崩溃，停止发送CAN帧[PS:仿真模式下不影响虚拟CAN帧发送]")
                 else:
                     self.is_heartbeating = True
                     self.logger.debug(f"上游心跳正常 - 心跳标志位{self.is_heartbeating}，心跳值为{self.safe_main_screen_heartbeat}，心跳窗口为{self.safe_main_screen_heartbeat_window}")
-
+            else:
+                self.is_heartbeating = False
+                self.logger.debug("MQTT未连接 - 上游心跳必然无")
             can_config = self.config_manager.get_can_config()
             mqtt_timeouts = self.config_manager.get_mqtt_protocol_timeouts()
             heartbeat_interval = mqtt_timeouts.get('heartbeat_detection_interval_sec', 1.0)

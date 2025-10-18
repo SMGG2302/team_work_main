@@ -1,15 +1,20 @@
 {
-  "simulation_mode": false,
+  "simulation_mode": true,
+  "configured": true,
   "mqtt": {
-    "broker": "10.201.50.104",
-    "simulation_broker": "10.201.50.104",
+    "broker": "127.0.0.1",
+    "simulation_broker": "127.0.0.1",
     "port": 1883,
     "keepalive": 3,
     "username": "device{device_serial}_client",
     "password": "111test",
     "client_id_prefix": "excavator_ctrl_",
     "control_topic_base": "{excavator_id}/ctrl/",
-    "non_control_topics": ["remote_sensor/remote_ctrl/rtk_info", "sensor2", "sensor3"],
+    "non_control_topics": [
+      "remote_sensor/remote_ctrl/rtk_info",
+      "sensor2",
+      "sensor3"
+    ],
     "safe_topic": "touch_screen/heartbeat",
     "safe_window_size": 4,
     "status_topics": {
@@ -24,23 +29,23 @@
   "can": {
     "interface": "can0",
     "bitrate": 250000,
-    "send_interval_ms": 100,
+    "send_interval_ms": 1000,
     "listen_timeout_ms": 1000,
-    "simulation_receive_messages": [  
+    "simulation_receive_messages": [
       {
-        "id": "0x211",
-        "data": "050F0F0F0F0F0F0F",
-        "interval_ms": 5000
+        "id": "0x214",
+        "data": "FF0F0F0F0F0F0F0F",
+        "interval_ms": 1000
       },
       {
-        "id": "0x221",
-        "data": "0A0B0F0F0F0F0F0F",
-        "interval_ms": 5000
+        "id": "0x234",
+        "data": "0A020F0F0F0F0F0F",
+        "interval_ms": 1000
       }
     ]
   },
   "logging": {
-    "level": "ERROR",
+    "level": "DEBUG",
     "file": "excavator_controller.log",
     "max_bytes": 10485760,
     "backup_count": 3
@@ -76,8 +81,9 @@
       "reconnect_min_delay_sec": 20,
       "reconnect_max_delay_sec": 40,
       "clean_session": true,
-      "heartbeat_detection_interval_sec":0.1
-    }
+      "heartbeat_detection_interval_sec": 0.1
+    },
+    "heartbeat_detection_interval_sec": 1
   },
   "protocol_file": "protocol.json"
 }

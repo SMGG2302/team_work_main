@@ -326,34 +326,46 @@ class DataCollector:
         # 获取CAN信号定义
         self.can_to_mqtt_rules = config_manager.get_can_to_mqtt_rules()
         self.mqtt_to_mqtt_rules = config_manager.get_protocol_config().get('mqtt_to_mqtt', {})
+        self.last_sent_data = {}
     
-    def _get_can_default_values(self):
-        """从 CAN 信号定义中提取默认值"""
+    def _get_can_default_values(self, last_sent_data=None):
+        """从 CAN 信号定义中提取默认值，并优先使用上一次发送的数据"""
         default_values = {}
-        
-        # 从 can_to_mqtt 规则中提取默认值
+
+        # 使用上次发送的数据（如果提供）来填充默认值
+        if last_sent_data:
+            for signal_name, last_value in last_sent_data.items():
+                # 如果上次发送的数据中有该信号的值，优先使用
+                if last_value is not None:
+                    default_values[signal_name] = last_value
+
+        # 如果没有使用上次发送的数据或上次没有该值，继续从 can_to_mqtt 规则中提取默认值
         for can_id, rule in self.can_to_mqtt_rules.items():
             signals = rule.get('signals', {})
             for signal_name, signal_def in signals.items():
-                default_value = signal_def.get('default_value')
-                if default_value is not None:
-                    default_values[signal_name] = default_value
-        
+                # 如果 signal_name 不在 last_sent_data 中，且没有默认值，则提取配置中的默认值
+                if signal_name not in default_values:
+                    default_value = signal_def.get('default_value')
+                    if default_value is not None:
+                        default_values[signal_name] = default_value
+
         # 如果没有新的默认值定义，使用旧的配置（向后兼容）
         if not default_values and self.default_values.get('can_data'):
             default_values = self.default_values['can_data'].copy()
-        
+
         return default_values
+
     
     def collect_can_data(self, translator, can_msg):
         """收集CAN数据，并填充默认值"""
         # 从信号定义中获取默认值
-        can_data = self._get_can_default_values()
+        can_data = self._get_can_default_values(self.last_sent_data)
         
         # 如果有CAN消息，则更新实际数据
         if can_msg:
             payload_dict = translator.translate_can_to_mqtt(can_msg)
             if payload_dict:
+                self.last_sent_data = payload_dict.copy()  # 保存上次发送的CAN翻译数据
                 can_data.update(payload_dict)  # 用实际数据覆盖默认值
                 self.logger.debug(f"CAN数据收集完成: {len(payload_dict)} 个实际信号，{len(can_data)} 个总信号（含默认值）")
             else:

@@ -151,6 +151,10 @@ class Translator:
 
         final_value = final_value * scale + offset
 
+        if scale:
+            #默认使用缩放需要输出的都是float类型
+            return final_value
+
         if 'int' in signal_type and not signal_type == 'float':
             final_value = round(final_value)
 
@@ -229,6 +233,11 @@ class Translator:
         except Exception as e:
              self.logger.error(f"更新信号状态时出错: {e}", exc_info=True)
              return False
+
+    def reset_state(self):
+        """重置所有信号状态为初始值"""
+        self.logger.warning("心跳消失，重置所有信号状态为初始值")
+        self._initialize_signal_state()
 
     def build_can_frame(self, can_id):
         """
